@@ -1,9 +1,9 @@
 const fs = require('fs');
 
 
-function readFile() {
+function readFile(dir = '') {
   return new Promise((resolve, reject) => {
-    fs.readFile('input.txt', 'utf8', function(err, data) {
+    fs.readFile(`${dir}/input.txt`, 'utf8', function(err, data) {
       if (err) {
         reject(err);
       } else {
