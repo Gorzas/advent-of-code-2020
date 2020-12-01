@@ -45,11 +45,6 @@ async function solutionTwo() {
     }
   }
 
-  let k = 0;
-
-  while (!results[arr[k]]) {
-    k++;
-  }
   for (let k = 0; k < arr.length; k++) {
     if (results[arr[k]]) {
       solution = results[arr[k]].concat(k);
