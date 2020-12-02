@@ -7,8 +7,8 @@ function prepareData(data) {
     .sort((a, b) => a > b ? -1 : 1);
 }
 
-async function solutionOne() {
-  const data = await readFile(__dirname);
+function solutionOne() {
+  const data = readFile(__dirname);
   const arr = prepareData(data);
   const results = {};
 
@@ -25,8 +25,8 @@ async function solutionOne() {
   console.log(arr[j] * arr[results[arr[j]]]);
 }
 
-async function solutionTwo() {
-  const data = await readFile(__dirname);
+function solutionTwo() {
+  const data = readFile(__dirname);
   const arr = prepareData(data);
   const results = {};
   let solution;
@@ -52,7 +52,9 @@ async function solutionTwo() {
     }
   }
 
-  console.log(solution.reduce((prev, cur) => prev * arr[cur], 1));
+  return solution.reduce((prev, cur) => prev * arr[cur], 1);
 }
 
-solutionTwo();
+console.time('Time');
+console.log(solutionTwo());
+console.timeEnd('Time');
