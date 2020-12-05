@@ -4,7 +4,7 @@
   "description": "* Link: [https://adventofcode.com/2020](https://adventofcode.com/2020)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Gorzas/advent-of-code-2020/issues"
   },
-  "homepage": "https://github.com/Gorzas/advent-of-code-2020#readme"
+  "homepage": "https://github.com/Gorzas/advent-of-code-2020#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
 }
