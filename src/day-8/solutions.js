@@ -7,15 +7,16 @@ function getInstruction(str) {
   ];
 }
 
-function solutionOne(data) {
+function runProgram(data) {
   let result = 0;
-  const instructions = {};
+  const instructions = new Set();
   let next = 0;
+  let ended = false;
 
   do {
     const [cmd, arg] = getInstruction(data[next]);
 
-    instructions[next] = true;
+    instructions.add(next);
 
     switch (cmd) {
       case 'jmp':
@@ -29,44 +30,49 @@ function solutionOne(data) {
         next += 1;
     }
 
-  } while(!instructions[next] && data[next])
- 
+    ended = !data[next];
+
+  } while(!instructions.has(next) && data[next])
+
+  return {
+    ended,
+    result,
+  };
+}
+
+function solutionOne(data) {
+  const {
+    result,
+  } = runProgram(data);
+
   return result;
 }
 
 function solutionTwo(data) {
   let result = 0;
-  const instructions = {};
-  let next = 0;
 
-  do {
-    const [cmd, arg] = getInstruction(data[next]);
+  for (let i = 0; i < data.length; i += 1) {
+    const [cmd, arg] = getInstruction(data[i]);
 
-    instructions[next] = true;
-
-    console.log(data[next]);
-
-    switch (cmd) {
-      case 'jmp':
-        next += arg;
-        break;
-      case 'acc':
-        result += arg;
-        next += 1;
-        break;
-      default:
-        next += 1;
+    if (!['nop', 'jmp'].includes(cmd)) {
+      continue;
     }
 
-    // loop ahead
-    if (instructions[next]) {
-      next = 'jmp' === cmd
-        ? next - arg + 1
-        : next + arg - 1;
-    }
+    let {
+      ended,
+      result: accumulator,
+    } = runProgram([
+      ...data.slice(0, i),
+      `${'jmp' === cmd ? 'nop' : 'jmp'} ${arg}`,
+      ...data.slice(i + 1),
+    ]);
 
-  } while(data[next])
- 
+    if (ended) {
+      result = accumulator;
+      break;
+    }
+  }
+
   return result;
 }
 
