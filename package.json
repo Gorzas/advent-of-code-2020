@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Gorzas/advent-of-code-2020#readme",
   "devDependencies": {
-    "jest": "^26.6.3"
+    "jest": "^29.0.0"
   }
 }
